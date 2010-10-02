@@ -1,12 +1,14 @@
-require 'rubygems'
-require 'rake'
+# Copyright © 2010, José Pablo Fernández
+
+require "rubygems"
+require "rake"
 
 begin
-  require 'jeweler'
+  require "jeweler"
   Jeweler::Tasks.new do |gem|
     gem.name = "assert_difference"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Better assert_difference than Rails}
+    gem.description = %Q{Better assert_difference than Rails by providing a more compact and readable syntax through hashes. For some more information read http://pupeno.com/blog/better-assert-difference}
     gem.email = "pupeno@pupeno.com"
     gem.homepage = "http://github.com/pupeno/assert_difference"
     gem.authors = ["J. Pablo Fernández"]
@@ -18,18 +20,18 @@ rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
 end
 
-require 'rake/testtask'
+require "rake/testtask"
 Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
+  test.libs << "lib" << "test"
+  test.pattern = "test/**/test_*.rb"
   test.verbose = true
 end
 
 begin
-  require 'rcov/rcovtask'
+  require "rcov/rcovtask"
   Rcov::RcovTask.new do |test|
-    test.libs << 'test'
-    test.pattern = 'test/**/test_*.rb'
+    test.libs << "test"
+    test.pattern = "test/**/test_*.rb"
     test.verbose = true
   end
 rescue LoadError
@@ -41,11 +43,11 @@ end
 task :test => :check_dependencies
 
 begin
-  require 'reek/adapters/rake_task'
+  require "reek/adapters/rake_task"
   Reek::RakeTask.new do |t|
     t.fail_on_error = true
     t.verbose = false
-    t.source_files = 'lib/**/*.rb'
+    t.source_files = "lib/**/*.rb"
   end
 rescue LoadError
   task :reek do
@@ -54,8 +56,8 @@ rescue LoadError
 end
 
 begin
-  require 'roodi'
-  require 'roodi_task'
+  require "roodi"
+  require "roodi_task"
   RoodiTask.new do |t|
     t.verbose = false
   end
@@ -68,7 +70,7 @@ end
 task :default => :test
 
 begin
-  require 'yard'
+  require "yard"
   YARD::Rake::YardocTask.new
 rescue LoadError
   task :yardoc do
