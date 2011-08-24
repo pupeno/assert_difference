@@ -1,4 +1,4 @@
-# Copyright © 2010, José Pablo Fernández
+# Copyright © 2010, 2011, José Pablo Fernández
 
 module AssertDifference
   # Test numeric difference between the return value of an expression as a result of what is evaluated

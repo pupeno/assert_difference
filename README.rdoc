@@ -31,4 +31,4 @@ For some more information read http://pupeno.com/blog/better-assert-difference
 
 == Copyright
 
-Copyright (c) 2010, 2011 José Pablo Fernández. See LICENSE for details.
+Copyright (c) 2010, 2011, José Pablo Fernández. See LICENSE for details.
