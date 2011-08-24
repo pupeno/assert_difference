@@ -1,6 +1,6 @@
 # Copyright © 2010, José Pablo Fernández
 
-class ActiveSupport::TestCase
+module AssertDifference
   # Test numeric difference between the return value of an expression as a result of what is evaluated
   # in the yielded block.
   #
