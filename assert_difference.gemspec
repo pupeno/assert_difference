@@ -2,7 +2,7 @@
 # Copyright © 2011, José Pablo Fernández
 
 $:.unshift File.expand_path("../lib", __FILE__)
-require "assert_difference/version"
+require "assert_difference"
 
 Gem::Specification.new do |s|
   s.name = "assert_difference"

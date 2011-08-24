@@ -21,4 +21,9 @@ Rcov::RcovTask.new do |test|
 end
 
 require "yard"
-YARD::Rake::YardocTask.new
+YARD::Rake::YardocTask.new do |yard|
+  # Use Markdown for documentation.
+  yard.options << "--markup" << "markdown"
+  # Extra file(s).
+  yard.options << "-" << "LICENSE"
+end
