@@ -16,15 +16,14 @@ tmtags
 ## RubyMine
 .idea
 
-## PROJECT::GENERAL
-coverage
-rdoc
-pkg
-
-## PROJECT::SPECIFIC
-*.gemspec
-
 ## Yard
 .yardoc
 doc
 
+## PROJECT::GENERAL
+coverage
+rdoc
+pkg
+.bundle
+tmp
+Gemfile.lock
