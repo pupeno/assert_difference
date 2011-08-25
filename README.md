@@ -22,17 +22,23 @@ would require a more verbose syntax:
       end
     end
 
-To use it with Test::Unit add this code (untested, please
-[let me know](mailto:pupeno@pupeno.com) if it works):
+To use it with Test::Unit add this code:
 
     class Test::Unit::TestCase
-      include Factory::Syntax::Methods
+      include AssertDifference
+    end
+
+or in Rails:
+
+    class ActiveSupport::TestCase
+      # ...
+      include AssertDifference
     end
 
 and to use it with RSpec:
 
     RSpec.configure do |config|
-      config.include Factory::Syntax::Methods
+      config.include AssertDifference
     end
 
 For more information read http://pupeno.com/blog/better-assert-difference
