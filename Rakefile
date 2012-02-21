@@ -1,20 +1,18 @@
 # -*- encoding: utf-8 -*-
 # Copyright © 2011, José Pablo Fernández
 
+require "rake"
+require "rake/testtask"
+require "bundler/gem_tasks"
+
+desc "Default: run unit tests."
 task :default => :test
 
-require "bundler"
-Bundler::GemHelper.install_tasks
-
-begin
-  require "rake/testtask"
-  Rake::TestTask.new(:test) do |test|
-    test.libs << "lib" << "test"
-    test.pattern = "test/**/test_*.rb"
-    test.verbose = true
-  end
-rescue LoadError => e
-  puts "rake is not installed, oh well?"
+desc "Test the table_builder plugin."
+Rake::TestTask.new(:test) do |t|
+  t.libs << "lib"
+  t.pattern = "test/**/*_test.rb"
+  t.verbose = true
 end
 
 begin
