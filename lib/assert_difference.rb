@@ -51,6 +51,13 @@ module AssertDifference
   #       post :something
   #     end
   #
+  # the results of the block is the result of the assert, so you can write
+  #
+  #     email = assert_difference "ActionMailer::Base.deliveries.count" => +1 do
+  #         Mailer.reset_password_email(@user).deliver
+  #     end
+  #     assert_equal [@user.email], email.to
+  #
   # @param [Array, Hash] expressions array of expressions to evaluate or hash
   #   table of expressions and expected difference.
   # @param [Integer] difference expected difference when using an array or single expression.
