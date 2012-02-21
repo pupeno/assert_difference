@@ -43,8 +43,8 @@ and to use it with RSpec:
 
 For more information read http://pupeno.com/blog/better-assert-difference
 
-Note on Patches/Pull Requests
------------------------------
+Notes on contributing
+---------------------
 
 * Fork the project.
 * Make your feature addition or bug fix.
@@ -53,8 +53,13 @@ Note on Patches/Pull Requests
 * Commit, do not mess with rakefile, version, or history.
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
+* Document any new options and verify the documentation looks correct by running:
+
+      yard server --reload
+
+  and going to http://localhost:8808
 
 Copyright
 ---------
 
-Copyright (c) 2010, 2011, José Pablo Fernández. See LICENSE for details.
+Copyright (c) 2010, 2011, 2012 José Pablo Fernández. See LICENSE for details.

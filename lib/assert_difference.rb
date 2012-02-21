@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-# Copyright © 2010, 2011, José Pablo Fernández
+# Copyright © 2010, 2011, 2012 José Pablo Fernández
 
 module AssertDifference
   VERSION = "0.3.1" unless defined?(::AssertDifference::VERSION)
