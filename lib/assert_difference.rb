@@ -55,6 +55,7 @@ module AssertDifference
   #   table of expressions and expected difference.
   # @param [Integer] difference expected difference when using an array or single expression.
   # @param [String, nil] message error message to display. One would be constructed if nil.
+  # @return whatever the block returned
   def assert_difference(expressions, difference = 1, message = nil, &block)
     b = block.send(:binding)
     if !expressions.is_a? Hash
@@ -66,12 +67,14 @@ module AssertDifference
     before = {}
     expressions.each { |exp, _| before[exp] = eval(exp, b) }
 
-    yield
+    result = yield
 
     expressions.each do |exp, diff|
       error = "#{exp.inspect} didn't change by #{diff}"
       error = "#{message}.\n#{error}" if message
       assert_equal(before[exp] + diff, eval(exp, b), error)
     end
+
+    return result
   end
 end
