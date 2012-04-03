@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.authors = ["J. Pablo Fernández"]
   s.email = ["pupeno@pupeno.com"]
-  s.homepage = "http://github.com/pupeno/assert_difference"
+  s.homepage = "http://pupeno.github.com/assert_difference/"
   s.summary = "An improved assert_difference"
   s.description = "Better assert_difference than Rails by providing a more compact and readable syntax through hashes. For some more information read http://pupeno.com/blog/better-assert-difference."
 
