@@ -58,17 +58,23 @@ module AssertDifference
   #     end
   #     assert_equal [@user.email], email.to
   #
+  # the expectations can also be ranges, for example:
+  #
+  #     assert_difference "Article.count" => 1, "sample_coments.count" => 2..4 do
+  #       post :something
+  #     end
+  #
   # @param [Array, Hash] expressions array of expressions to evaluate or hash
   #   table of expressions and expected difference.
-  # @param [Integer] difference expected difference when using an array or single expression.
+  # @param [Integer or Range] expected_difference expected difference when using an array or single expression.
   # @param [String, nil] message error message to display. One would be constructed if nil.
   # @return whatever the block returned
-  def assert_difference(expressions, difference = 1, message = nil, &block)
+  def assert_difference(expressions, expected_difference = 1, message = nil, &block)
     b = block.send(:binding)
     if !expressions.is_a? Hash
       exps = Array.wrap(expressions)
       expressions = {}
-      exps.each { |e| expressions[e] = difference }
+      exps.each { |e| expressions[e] = expected_difference }
     end
 
     before = {}
@@ -78,9 +84,13 @@ module AssertDifference
 
     error_messages = []
     expressions.each do |exp, diff|
-      expected = before[exp] + diff
+      expected = if diff.is_a? Range
+                   (before[exp] + diff.first)..(before[exp] + diff.end)
+                 else
+                   before[exp] + diff
+                 end
       actual = eval(exp, b)
-      if expected != actual
+      if expected.is_a?(Range) ? !expected.include?(actual) : expected != actual
         error = "#{exp.inspect} didn't change by #{diff} (expecting #{expected}, but got #{actual})"
         error = "#{message}.\n#{error}" if message
         error_messages << error

@@ -22,6 +22,14 @@ would require a more verbose syntax:
       end
     end
 
+Expectations can also be ranges, for example:
+
+    assert_difference "Blog.count" => +1, "Post.count" => 2..5 do # Generate some sample posts when creating a blog
+      post :create
+    end
+
+On top of that, error reporting is improved by displaying all the counters that didn't match except only one.
+
 To use it with Test::Unit add this code:
 
     class Test::Unit::TestCase
