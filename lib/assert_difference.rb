@@ -76,10 +76,19 @@ module AssertDifference
 
     result = yield
 
+    error_messages = []
     expressions.each do |exp, diff|
-      error = "#{exp.inspect} didn't change by #{diff}"
-      error = "#{message}.\n#{error}" if message
-      assert_equal(before[exp] + diff, eval(exp, b), error)
+      expected = before[exp] + diff
+      actual = eval(exp, b)
+      if expected != actual
+        error = "#{exp.inspect} didn't change by #{diff} (expecting #{expected}, but got #{actual})"
+        error = "#{message}.\n#{error}" if message
+        error_messages << error
+      end
+    end
+
+    if error_messages.any?
+      fail error_messages.join(error_message.any? { |m| m.includes? "\n" } ? "\n\n" : ". ").strip
     end
 
     return result
