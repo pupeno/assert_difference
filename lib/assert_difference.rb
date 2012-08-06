@@ -2,7 +2,7 @@
 # Copyright © 2010, 2011, 2012 José Pablo Fernández
 
 module AssertDifference
-  VERSION = "0.4.1" unless defined?(::AssertDifference::VERSION)
+  VERSION = "0.4.2" unless defined?(::AssertDifference::VERSION)
 
   # Test numeric difference between the return value of an expression as a result of what is evaluated
   # in the yielded block.
