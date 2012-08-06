@@ -88,7 +88,7 @@ module AssertDifference
     end
 
     if error_messages.any?
-      fail error_messages.join(error_message.any? { |m| m.includes? "\n" } ? "\n\n" : ". ").strip
+      fail error_messages.join(error_messages.any? { |m| m.include? "\n" } ? "\n\n" : ". ").strip
     end
 
     return result
