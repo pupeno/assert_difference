@@ -1,4 +1,4 @@
-assert_difference [![Inline docs](http://inch-pages.github.io/github/pupeno/assert_difference.png)](http://inch-pages.github.io/github/pupeno/assert_difference)
+assert_difference [![Inline docs](http://inch-ci.org/github/pupeno/assert_difference.png)](http://inch-ci.org/github/pupeno/assert_difference)
 =================
 
 A nice assert_difference method similar to the one provided by Rails but with
