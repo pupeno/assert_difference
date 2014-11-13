@@ -77,15 +77,11 @@ module AssertDifference
     result = yield
 
     error_messages = []
-    expressions.each do |exp, expected_difference|
-      expected_value = if expected_difference.is_a? Range
-                         (before[exp] + expected_difference.first)..(before[exp] + expected_difference.end)
-                       else
-                         before[exp] + expected_difference
-                       end
-      actual_difference = eval(exp, binding)
-      if expected_value.is_a?(Range) ? !expected_value.include?(actual_difference) : expected_value != actual_difference
-        error = "#{exp.inspect} didn't change by #{expected_difference} (expecting #{expected_value}, but got #{actual_difference})"
+    expressions.each do |expression, expected_difference|
+      expected_value = generate_expected_value(before[expression], expected_difference)
+      actual_difference = eval(expression, binding)
+      if !expression_passes?(actual_difference, expected_value)
+        error = "#{expression.inspect} didn't change by #{expected_difference} (expecting #{expected_value}, but got #{actual_difference})"
         error = "#{message}.\n#{error}" if message
         error_messages << error
       end
@@ -99,6 +95,24 @@ module AssertDifference
   end
 
   private
+
+  # Generate the expected value or range based of the value before and the expected difference.
+  def generate_expected_value(before, expected_difference)
+    if expected_difference.is_a? Range
+      (before + expected_difference.first)..(before + expected_difference.end)
+    else
+      before + expected_difference
+    end
+  end
+
+  # Do the appropriate comparison depending on whether the expectation is a range or a value
+  def expression_passes?(actual_difference, expected_value)
+    if expected_value.is_a?(Range)
+      expected_value.include?(actual_difference)
+    else
+      expected_value == actual_difference
+    end
+  end
 
   # Turn an array or a single expression into a hash of expressions and expectations.
   def expressions_as_hash(expected_difference, expressions)
