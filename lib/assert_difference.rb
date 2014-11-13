@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# encoding: UTF-8
 # Copyright © 2010, 2011, 2012 José Pablo Fernández
 
 module AssertDifference

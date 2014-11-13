@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# encoding: UTF-8
 # Copyright © 2011, José Pablo Fernández
 
 $:.unshift File.expand_path("../lib", __FILE__)
