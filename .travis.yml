@@ -5,3 +5,7 @@ rvm:
   - "2.1.1"
   - "2.1.2"
   - "2.1.3"
+addons:
+  code_climate:
+    repo_token:
+      secure: "drMasDnIxU1N0UN/0OvJI+nxaj6IsJsPnreodr2VxP2hCI2uHzybk78q5X7LnQVaPd8BBQiXLqmCx0KkyiTb1GbXO0kS992w4C4wbQBwraWs+Ifd18SCCUTCJ84zS3vgh62sHTv/LlLcPLo9yjkPfHYsprVgkK0HryEYNNmEhI4="
