@@ -64,29 +64,20 @@ module AssertDifference
   #       post :something
   #     end
   #
-  # @param [Array, Hash] expressions array of expressions to evaluate or hash
-  #   table of expressions and expected difference.
+  # @param [Array, Hash] expectations array of expectations to evaluate or hash
+  #   table of expectations and expected difference.
   # @param [Integer or Range] expected_difference expected difference when using an array or single expression.
-  # @param [String, nil] message error message to display. One would be constructed if nil.
-  # @return whatever the block returned
-  def assert_difference(expressions, expected_difference = 1, message = nil, &block)
+  # @param [String, nil] message error message to display on top of the description of the expectaion failed.
+  # @return Object whatever the block returned
+  def assert_difference(expectations, expected_difference = 1, message = nil, &block)
     binding = block.send(:binding)
-    expressions = expressions_as_hash(expected_difference, expressions) unless expressions.is_a? Hash
-    before = expressions.keys.each_with_object({}) { |exp, before| before[exp] = eval(exp, binding) }
+    expectations = expectations_as_hash(expected_difference, expectations) unless expectations.is_a? Hash
+    before = expectations.keys.each_with_object({}) { |expression, before| before[expression] = eval(expression, binding) }
 
     result = yield
 
-    error_messages = []
-    expressions.each do |expression, expected_difference|
-      expected_value = generate_expected_value(before[expression], expected_difference)
-      actual_difference = eval(expression, binding)
-      if !expression_passes?(actual_difference, expected_value)
-        error = "#{expression.inspect} didn't change by #{expected_difference} (expecting #{expected_value}, but got #{actual_difference})"
-        error = "#{message}.\n#{error}" if message
-        error_messages << error
-      end
-    end
-
+    after = expectations.keys.each_with_object({}) { |expression, after| after[expression] = eval(expression, binding) }
+    error_messages = generate_error_messages(after, before, expectations, message)
     if error_messages.any?
       fail error_messages.join(error_messages.any? { |m| m.include? "\n" } ? "\n\n" : ". ").strip
     end
@@ -95,6 +86,23 @@ module AssertDifference
   end
 
   private
+
+  # Turn an array or a single expression into a hash of expectations and expectations.
+  def expectations_as_hash(expected_difference, expressions)
+    Array.wrap(expressions).each_with_object({}) { |expression, expressions| expressions[expression] = expected_difference }
+  end
+
+  # For the cases in which there isn't a match, generate an error message.
+  def generate_error_messages(after, before, expressions, message)
+    expressions.map do |expression, expected_difference|
+      expected_value = generate_expected_value(before[expression], expected_difference)
+      if !expression_passes?(after[expression], expected_value)
+        error = "#{expression.inspect} didn't change by #{expected_difference} (expecting #{expected_value}, but got #{after[expression]})"
+        error = "#{message}.\n#{error}" if message
+        error
+      end
+    end.compact
+  end
 
   # Generate the expected value or range based of the value before and the expected difference.
   def generate_expected_value(before, expected_difference)
@@ -112,10 +120,5 @@ module AssertDifference
     else
       expected_value == actual_difference
     end
-  end
-
-  # Turn an array or a single expression into a hash of expressions and expectations.
-  def expressions_as_hash(expected_difference, expressions)
-      Array.wrap(expressions).each_with_object({}) { |expression, expressions| expressions[expression] = expected_difference }
   end
 end
