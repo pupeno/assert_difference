@@ -1,9 +1,7 @@
 # encoding: UTF-8
-# Copyright © 2010, 2011, 2012 José Pablo Fernández
+# Copyright © 2010, 2011, 2012, 2014 José Pablo Fernández
 
 module AssertDifference
-  VERSION = "0.5.0" unless defined?(::AssertDifference::VERSION)
-
   # Test numeric difference between the return value of an expression as a result of what is evaluated
   # in the yielded block.
   #
