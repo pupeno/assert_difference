@@ -1,15 +1,19 @@
-assert_difference [![Inline docs](http://inch-ci.org/github/pupeno/assert_difference.png)](http://inch-ci.org/github/pupeno/assert_difference)
-=================
+# assert_difference
 
-A nice assert_difference method similar to the one provided by Rails but with
-some improvements. For example:
+[![Build Status](https://travis-ci.org/pupeno/assert_difference.png?branch=master)](https://travis-ci.org/pupeno/assert_difference)
+[![Coverage Status](https://coveralls.io/repos/pupeno/assert_difference/badge.png?branch=master)](https://coveralls.io/r/pupeno/assert_difference?branch=master)
+[![Code Climate](https://codeclimate.com/github/pupeno/assert_difference.png)](https://codeclimate.com/github/pupeno/assert_difference)
+[![Inline docs](http://inch-ci.org/github/pupeno/assert_difference.png)](http://inch-ci.org/github/pupeno/assert_difference)
+[![Gem Version](https://badge.fury.io/rb/assert_difference.png)](http://badge.fury.io/rb/assert_difference)
+[![Dependency Status](https://gemnasium.com/pupeno/assert_difference.svg)](https://gemnasium.com/pupeno/assert_difference)
+
+A nice assert_difference method similar to the one provided by Rails but with some improvements. For example:
 
     assert_difference "Company.count" => +1, "User.count" => +5, "Slot.count" => -1 do
       post :something
     end
 
-will assert that a company and 5 users were create (the plus sign is only for
-the visual aid) and a slot was removed.
+will assert that a company and 5 users were create (the plus sign is only for the visual aid) and a slot was removed.
 
 [Rails' assert_difference](http://api.rubyonrails.org/classes/ActiveSupport/Testing/Assertions.html#method-i-assert_difference)
 would require a more verbose syntax:
@@ -28,7 +32,7 @@ Expectations can also be ranges, for example:
       post :create
     end
 
-On top of that, error reporting is improved by displaying all the counters that didn't match except only one.
+On top of that, error reporting is improved by displaying all the counters that didn't match.
 
 To use it with Test::Unit add this code:
 
@@ -49,25 +53,48 @@ and to use it with RSpec:
       config.include AssertDifference
     end
 
-For more information read http://pupeno.com/blog/better-assert-difference
+## Changelog
 
-Notes on contributing
----------------------
+### Next version
+- Modernization of the gem.
+- Test with 100% code coverage.
+- Started using Travis-CI for continuous testing.
+- Improved documentation.
 
-* Fork the project.
-* Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a
-  future version unintentionally.
-* Commit, do not mess with rakefile, version, or history.
-  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
-* Send me a pull request. Bonus points for topic branches.
-* Document any new options and verify the documentation looks correct by running:
+### Version 0.5.0
+- Expectations can be ranges.
 
-      yard server --reload
+### Version 0.4.2
+- Fixed important typo.
+### Version 0.4.1
+- Better error reporting (all unmatching counters).
 
-  and going to http://localhost:8808
+### Version 0.4.0
+- Fix crash on missing gems.
+- Return what the blocks returns.
+
+### Version 0.3.1 (Aug 25, 2011)
+- Fixed documentation.
+
+### Version 0.3.0 (Aug 24, 2011)
+- Better organization of code with modules.
+- Switched to bundler from jeweler.
+- Removed unneeded dependencies.
+- Cleaned up documentation.
+
+### Version 0.1.0 (Oct 2, 2010)
+- Initial release. Code extracted from a personal project.
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am "Add some feature"`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
+
 
 Copyright
 ---------
 
-Copyright (c) 2010, 2011, 2012 José Pablo Fernández. See LICENSE for details.
+Copyright (c) 2010, 2011, 2012, 2014 José Pablo Fernández. See LICENSE for details.
