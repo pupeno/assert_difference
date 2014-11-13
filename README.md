@@ -61,15 +61,16 @@ and to use it with RSpec:
 - Started using Travis-CI for continuous testing.
 - Improved documentation.
 
-### Version 0.5.0
+### Version 0.5.0 (Aug 6, 2012)
 - Expectations can be ranges.
 
-### Version 0.4.2
+### Version 0.4.2 (Aug 6, 2012)
 - Fixed important typo.
-### Version 0.4.1
+
+### Version 0.4.1 (Aug 6, 2012)
 - Better error reporting (all unmatching counters).
 
-### Version 0.4.0
+### Version 0.4.0 (Feb 21, 2012)
 - Fix crash on missing gems.
 - Return what the blocks returns.
 
