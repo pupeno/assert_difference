@@ -1,6 +1,8 @@
 # encoding: UTF-8
 # Copyright © 2010, 2011, 2012, 2014 José Pablo Fernández
 
+require "active_support/core_ext/array/wrap"
+
 module AssertDifference
   # Test numeric difference between the return value of an expression as a result of what is evaluated
   # in the yielded block.
