@@ -6,15 +6,14 @@ require "rubygems"
 # Test coverage
 require "simplecov"
 require "coveralls"
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-    SimpleCov::Formatter::HTMLFormatter,
-    Coveralls::SimpleCov::Formatter
-]
 SimpleCov.start do
   add_filter "/test/"
 end
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
+if ENV["CI"]
+  Coveralls.wear
+  require "codeclimate-test-reporter"
+  CodeClimate::TestReporter.start
+end
 
 require "minitest/autorun"
 require "minitest/reporters"
