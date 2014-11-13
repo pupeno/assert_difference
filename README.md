@@ -1,8 +1,9 @@
 # assert_difference
 
 [![Build Status](https://travis-ci.org/pupeno/assert_difference.png?branch=master)](https://travis-ci.org/pupeno/assert_difference)
-[![Coverage Status](https://coveralls.io/repos/pupeno/assert_difference/badge.png?branch=master)](https://coveralls.io/r/pupeno/assert_difference?branch=master)
+[![Coverage Status](https://coveralls.io/repos/pupeno/assert_difference/badge.png)](https://coveralls.io/r/pupeno/assert_difference)
 [![Code Climate](https://codeclimate.com/github/pupeno/assert_difference.png)](https://codeclimate.com/github/pupeno/assert_difference)
+[![Test Coverage](https://codeclimate.com/github/pupeno/assert_difference/badges/coverage.svg)](https://codeclimate.com/github/pupeno/assert_difference)
 [![Inline docs](http://inch-ci.org/github/pupeno/assert_difference.png)](http://inch-ci.org/github/pupeno/assert_difference)
 [![Gem Version](https://badge.fury.io/rb/assert_difference.png)](http://badge.fury.io/rb/assert_difference)
 [![Dependency Status](https://gemnasium.com/pupeno/assert_difference.svg)](https://gemnasium.com/pupeno/assert_difference)
@@ -52,6 +53,8 @@ and to use it with RSpec:
     RSpec.configure do |config|
       config.include AssertDifference
     end
+
+This gem should work without Rails but it does depend on active support >= 3.0.0 and it's [tested with active support 3.0, 3.1, 3.2, 4.0 and 4.1 as well as Ruby 1.9.3, 2.0 and 2.1](https://travis-ci.org/pupeno/assert_difference).
 
 ## Changelog
 
