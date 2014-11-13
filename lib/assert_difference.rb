@@ -79,7 +79,7 @@ module AssertDifference
     after = expectations.keys.each_with_object({}) { |expression, after| after[expression] = eval(expression, binding) }
     error_messages = generate_error_messages(after, before, expectations, message)
     if error_messages.any?
-      fail error_messages.join(error_messages.any? { |m| m.include? "\n" } ? "\n\n" : ". ").strip
+      fail error_messages.join("\n\n").strip
     end
 
     return result
