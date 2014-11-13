@@ -10,7 +10,7 @@ SimpleCov.start do
   add_filter "/test/"
 end
 if ENV["CI"]
-  Coveralls.wear
+  Coveralls.wear!
   require "codeclimate-test-reporter"
   CodeClimate::TestReporter.start
 end
