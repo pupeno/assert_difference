@@ -1,24 +1,27 @@
 # encoding: UTF-8
-# Copyright © 2011, José Pablo Fernández
+# Copyright © 2011, 2014 José Pablo Fernández
 
-$:.unshift File.expand_path("../lib", __FILE__)
-require "assert_difference"
+lib = File.expand_path("../lib", __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require "assert_difference/version"
 
-Gem::Specification.new do |s|
-  s.name = "assert_difference"
-  s.version = AssertDifference::VERSION
-  s.platform = Gem::Platform::RUBY
-  s.authors = ["J. Pablo Fernández"]
-  s.email = ["pupeno@pupeno.com"]
-  s.homepage = "http://pupeno.github.com/assert_difference/"
-  s.summary = "Like Rails' assert_difference, but more powerful"
-  s.description = "Like Rails' assert_difference, but more compact and readable syntax through hashes, testing ranges and improved error reporting."
+Gem::Specification.new do |spec|
+  spec.name          = "assert_difference"
+  spec.version       = AssertDifference::VERSION
+  spec.authors       = ["J. Pablo Fernández"]
+  spec.email         = ["pupeno@pupeno.com"]
+  spec.homepage      = "https://github.com/pupeno/assert_difference"
+  spec.summary       = "Like Rails' assert_difference, but more powerful"
+  spec.description   = "Like Rails' assert_difference, but more compact and readable syntax through hashes, testing ranges and improved error reporting."
+  spec.license       = "MIT"
 
-  s.required_rubygems_version = ">= 1.3.6"
-  s.rubyforge_project = "assert_difference"
+  spec.files         = `git ls-files`.split($/)
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.require_paths = ["lib"]
 
-  s.add_development_dependency "yard"
+  spec.required_ruby_version = ">= 1.9.3"
 
-  s.files = `git ls-files`.split("\n")
-  s.test_files = `git ls-files -- {test}/*`.split("\n")
+  spec.add_development_dependency "bundler"
+  spec.add_development_dependency "rake"
 end
