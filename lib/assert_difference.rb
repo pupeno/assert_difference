@@ -70,28 +70,22 @@ module AssertDifference
   # @param [String, nil] message error message to display. One would be constructed if nil.
   # @return whatever the block returned
   def assert_difference(expressions, expected_difference = 1, message = nil, &block)
-    b = block.send(:binding)
-    if !expressions.is_a? Hash
-      exps = Array.wrap(expressions)
-      expressions = {}
-      exps.each { |e| expressions[e] = expected_difference }
-    end
-
-    before = {}
-    expressions.each { |exp, _| before[exp] = eval(exp, b) }
+    binding = block.send(:binding)
+    expressions = expressions_as_hash(expected_difference, expressions) unless expressions.is_a? Hash
+    before = expressions.keys.each_with_object({}) { |exp, before| before[exp] = eval(exp, binding) }
 
     result = yield
 
     error_messages = []
-    expressions.each do |exp, diff|
-      expected = if diff.is_a? Range
-                   (before[exp] + diff.first)..(before[exp] + diff.end)
-                 else
-                   before[exp] + diff
-                 end
-      actual = eval(exp, b)
-      if expected.is_a?(Range) ? !expected.include?(actual) : expected != actual
-        error = "#{exp.inspect} didn't change by #{diff} (expecting #{expected}, but got #{actual})"
+    expressions.each do |exp, expected_difference|
+      expected_value = if expected_difference.is_a? Range
+                         (before[exp] + expected_difference.first)..(before[exp] + expected_difference.end)
+                       else
+                         before[exp] + expected_difference
+                       end
+      actual_difference = eval(exp, binding)
+      if expected_value.is_a?(Range) ? !expected_value.include?(actual_difference) : expected_value != actual_difference
+        error = "#{exp.inspect} didn't change by #{expected_difference} (expecting #{expected_value}, but got #{actual_difference})"
         error = "#{message}.\n#{error}" if message
         error_messages << error
       end
@@ -102,5 +96,12 @@ module AssertDifference
     end
 
     return result
+  end
+
+  private
+
+  # Turn an array or a single expression into a hash of expressions and expectations.
+  def expressions_as_hash(expected_difference, expressions)
+      Array.wrap(expressions).each_with_object({}) { |expression, expressions| expressions[expression] = expected_difference }
   end
 end
