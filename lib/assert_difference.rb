@@ -67,7 +67,7 @@ module AssertDifference
   # @param [Array, Hash] expectations array of expectations to evaluate or hash
   #   table of expectations and expected difference.
   # @param [Integer or Range] expected_difference expected difference when using an array or single expression.
-  # @param [String, nil] message error message to display on top of the description of the expectaion failed.
+  # @param [String, nil] message error message to display on top of the description of the expectation failed.
   # @return Object whatever the block returned
   def assert_difference(expectations, expected_difference = 1, message = nil, &block)
     binding = block.send(:binding)

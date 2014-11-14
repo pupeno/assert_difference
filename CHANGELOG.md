@@ -4,6 +4,7 @@ Authoritative changelog in README.md.
 - Modernization of the gem.
 - Test with 100% code coverage.
 - Started using Travis-CI for continuous testing.
+- Started testing in various versions of active support and ruby.
 - Improved documentation.
 
 ## Version 0.5.0 (Aug 6, 2012)

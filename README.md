@@ -56,12 +56,20 @@ and to use it with RSpec:
 
 This gem should work without Rails but it does depend on active support >= 3.0.0 and it's [tested with active support 3.0, 3.1, 3.2, 4.0 and 4.1 as well as Ruby 1.9.3, 2.0 and 2.1](https://travis-ci.org/pupeno/assert_difference).
 
+## Users
+
+This gem is being used by:
+
+- [Watu](https://watuapp.com)
+- You? please, let us know if you are using this gem.
+
 ## Changelog
 
 ### Next version
 - Modernization of the gem.
 - Test with 100% code coverage.
 - Started using Travis-CI for continuous testing.
+- Started testing in various versions of active support and ruby.
 - Improved documentation.
 
 ### Version 0.5.0 (Aug 6, 2012)
