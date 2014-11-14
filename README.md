@@ -1,7 +1,6 @@
 # assert_difference
 
 [![Build Status](https://travis-ci.org/pupeno/assert_difference.png?branch=master)](https://travis-ci.org/pupeno/assert_difference)
-[![Coverage Status](https://coveralls.io/repos/pupeno/assert_difference/badge.png)](https://coveralls.io/r/pupeno/assert_difference)
 [![Code Climate](https://codeclimate.com/github/pupeno/assert_difference.png)](https://codeclimate.com/github/pupeno/assert_difference)
 [![Test Coverage](https://codeclimate.com/github/pupeno/assert_difference/badges/coverage.svg)](https://codeclimate.com/github/pupeno/assert_difference)
 [![Inline docs](http://inch-ci.org/github/pupeno/assert_difference.png)](http://inch-ci.org/github/pupeno/assert_difference)
