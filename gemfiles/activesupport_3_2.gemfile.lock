@@ -1,7 +1,7 @@
 PATH
   remote: ../
   specs:
-    assert_difference (0.5.0)
+    assert_difference (1.0.0)
       activesupport (>= 3.0.0)
 
 GEM
