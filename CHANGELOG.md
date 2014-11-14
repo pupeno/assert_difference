@@ -1,6 +1,6 @@
 Authoritative changelog in README.md.
 
-## Next version
+## Version 1.0.0 (Nov 14, 2014)
 - Modernization of the gem.
 - Test with 100% code coverage.
 - Started using Travis-CI for continuous testing.
