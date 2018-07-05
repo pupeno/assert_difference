@@ -5,7 +5,6 @@
 [![Test Coverage](https://codeclimate.com/github/pupeno/assert_difference/badges/coverage.svg)](https://codeclimate.com/github/pupeno/assert_difference)
 [![Inline docs](http://inch-ci.org/github/pupeno/assert_difference.png)](http://inch-ci.org/github/pupeno/assert_difference)
 [![Gem Version](https://badge.fury.io/rb/assert_difference.png)](http://badge.fury.io/rb/assert_difference)
-[![Dependency Status](https://gemnasium.com/pupeno/assert_difference.svg)](https://gemnasium.com/pupeno/assert_difference)
 
 A nice assert_difference method similar to the one provided by Rails but with some improvements. For example:
 
