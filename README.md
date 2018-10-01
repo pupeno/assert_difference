@@ -52,13 +52,21 @@ and to use it with RSpec:
       config.include AssertDifference
     end
 
-This gem should work without Rails but it does depend on active support >= 3.0.0 and it's [tested with active support 3.0, 3.1, 3.2, 4.0 and 4.1 as well as Ruby 1.9.3, 2.0 and 2.1](https://travis-ci.org/pupeno/assert_difference).
+## Support
+
+This gem requires activesupport >= 3.0.0. It is currently being [tested against Ruby 2.2, 2.3, 2.4 and 2.5 with Rails
+4.2, 5.0, 5.1 and 5.2](https://travis-ci.org/pupeno/assert_difference), but it's likely to work fine with earlier and 
+later versions of both Ruby and Rails (hence the very permissive dependency on activesupport).
+
+Up to version ~> 1.0.0 of this gem, it was [tested with active support 3.0, 3.1, 3.2, 4.0 and 4.1 as well as Ruby 1.9.3,
+ 2.0 and 2.1](https://travis-ci.org/pupeno/assert_difference/builds/40992839).
 
 ## Users
 
 This gem is being used by:
 
 - [Watu](https://watuapp.com)
+- [Dashman](https://dashman.tech)
 - You? please, let us know if you are using this gem.
 
 ## Changelog
