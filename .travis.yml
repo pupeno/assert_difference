@@ -9,3 +9,9 @@ gemfile:
   - gemfiles/activesupport_5_0.gemfile
   - gemfiles/activesupport_5_1.gemfile
   - gemfiles/activesupport_5_2.gemfile
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
