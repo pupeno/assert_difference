@@ -8,49 +8,61 @@
 
 A nice assert_difference method similar to the one provided by Rails but with some improvements. For example:
 
-    assert_difference "Company.count" => +1, "User.count" => +5, "Slot.count" => -1 do
-      post :something
-    end
+```ruby
+assert_difference "Company.count" => +1, "User.count" => +5, "Slot.count" => -1 do
+  post :something
+end
+```
 
 will assert that a company and 5 users were create (the plus sign is only for the visual aid) and a slot was removed.
 
 [Rails' assert_difference](http://api.rubyonrails.org/classes/ActiveSupport/Testing/Assertions.html#method-i-assert_difference)
 would require a more verbose syntax:
 
-    assert_difference "Company.count" do
-      assert_difference "User.count", +5 do
-        assert_difference "Article.count", -1 do
-          post :something
-        end
-      end
+```ruby
+assert_difference "Company.count" do
+  assert_difference "User.count", +5 do
+    assert_difference "Article.count", -1 do
+      post :something
     end
+  end
+end
+```
 
 Expectations can also be ranges, for example:
 
-    assert_difference "Blog.count" => +1, "Post.count" => 2..5 do # Generate some sample posts when creating a blog
-      post :create
-    end
+```ruby
+assert_difference "Blog.count" => +1, "Post.count" => 2..5 do # Generate some sample posts when creating a blog
+  post :create
+end
+```
 
 On top of that, error reporting is improved by displaying all the counters that didn't match.
 
 To use it with Test::Unit add this code:
 
-    class Test::Unit::TestCase
-      include AssertDifference
-    end
+```ruby
+class Test::Unit::TestCase
+  include AssertDifference
+end
+```
 
 or in Rails:
 
-    class ActiveSupport::TestCase
-      # ...
-      include AssertDifference
-    end
+```ruby
+class ActiveSupport::TestCase
+  # ...
+  include AssertDifference
+end
+```
 
 and to use it with RSpec:
 
-    RSpec.configure do |config|
-      config.include AssertDifference
-    end
+```ruby
+RSpec.configure do |config|
+  config.include AssertDifference
+end
+```
 
 ## Support
 
