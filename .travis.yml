@@ -1,18 +1,8 @@
 language: ruby
 rvm:
-  - "1.9.3"
-  - "2.0.0"
-  - "2.1.10"
-  - "2.2.10"
-  - "2.3.7"
-  - "2.4.4"
   - "2.5.1"
 gemfile:
   - gemfiles/activesupport_4_2.gemfile
   - gemfiles/activesupport_5_0.gemfile
   - gemfiles/activesupport_5_1.gemfile
   - gemfiles/activesupport_5_2.gemfile
-addons:
-  code_climate:
-    repo_token:
-      secure: "drMasDnIxU1N0UN/0OvJI+nxaj6IsJsPnreodr2VxP2hCI2uHzybk78q5X7LnQVaPd8BBQiXLqmCx0KkyiTb1GbXO0kS992w4C4wbQBwraWs+Ifd18SCCUTCJ84zS3vgh62sHTv/LlLcPLo9yjkPfHYsprVgkK0HryEYNNmEhI4="

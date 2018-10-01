@@ -3,18 +3,6 @@
 
 require "rubygems"
 
-# Test coverage
-require "simplecov"
-require "coveralls"
-SimpleCov.start do
-  add_filter "/test/"
-end
-if ENV["CI"]
-  Coveralls.wear!
-  require "codeclimate-test-reporter"
-  CodeClimate::TestReporter.start
-end
-
 require "minitest/autorun"
 require "minitest/reporters"
 MiniTest::Reporters.use!
