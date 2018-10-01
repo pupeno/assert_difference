@@ -1,5 +1,5 @@
 # encoding: UTF-8
-# Copyright © 2011, 2014 José Pablo Fernández
+# Copyright © 2010-2018 José Pablo Fernández
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)

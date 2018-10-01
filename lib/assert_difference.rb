@@ -1,5 +1,5 @@
 # encoding: UTF-8
-# Copyright © 2010, 2011, 2012, 2014 José Pablo Fernández
+# Copyright © 2010-2018 José Pablo Fernández
 
 require "active_support/core_ext/array/wrap"
 

@@ -1,4 +1,4 @@
-# Copyright © 2014, Watu
+# Copyright © 2010-2018 José Pablo Fernández
 
 appraise "activesupport-3_0" do
   gem "activesupport", "~> 3.0.0"

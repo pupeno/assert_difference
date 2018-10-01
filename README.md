@@ -107,4 +107,4 @@ This gem is being used by:
 Copyright
 ---------
 
-Copyright (c) 2010, 2011, 2012, 2014 José Pablo Fernández. See LICENSE for details.
+Copyright © 2010-2018 José Pablo Fernández. See LICENSE for details.
