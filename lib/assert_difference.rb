@@ -64,11 +64,11 @@ module AssertDifference
   #       post :something
   #     end
   #
-  # @param [Array, Hash] expectations array of expectations to evaluate or hash
-  #   table of expectations and expected difference.
-  # @param [Integer or Range] expected_difference expected difference when using an array or single expression.
+  # @param [String, Array, Hash] expectations single expectation as a string, an array of expectations or hash table of
+  #   expectations and expected difference.
+  # @param [Integer, Range, nil] expected_difference expected difference when using an array or single expression.
   # @param [String, nil] message error message to display on top of the description of the expectation failed.
-  # @return Object whatever the block returned
+  # @return [Object] whatever the block returned
   def assert_difference(expectations, expected_difference = 1, message = nil, &block)
     binding = block.send(:binding)
     expectations = expectations_as_hash(expected_difference, expectations) unless expectations.is_a? Hash
@@ -82,21 +82,32 @@ module AssertDifference
       fail error_messages.join("\n\n").strip
     end
 
-    return result
+    result
   end
 
   private
 
   # Turn an array or a single expression into a hash of expectations and expectations.
-  def expectations_as_hash(expected_difference, expressions)
-    Array.wrap(expressions).each_with_object({}) { |expression, expressions| expressions[expression] = expected_difference }
+  # @param [Integer or Range] expected_difference expected difference when using an array or single expression.
+  # @param [Array, String] expectations single or array of expectations to evaluate.
+  # @return [Hash] A hash of expressions and the expected difference on each one.
+  def expectations_as_hash(expected_difference, expectations)
+    Array.wrap(expectations).each_with_object({}) do |expression, new_expectations|
+      new_expectations[expression] = expected_difference
+    end
   end
 
   # For the cases in which there isn't a match, generate an error message.
-  def generate_error_messages(after, before, expressions, message)
-    expressions.map do |expression, expected_difference|
+  # @param [Hash] after The value after running each of the expressions, as a hash indexed by expression.
+  # @param [Hash] before The value before running each of the expressions, as a hash indexed by expression.
+  # @param [Hash] expected_differences The expected difference for each of the expressions, as a hash indexed by
+  #    expression.
+  # @param [String] message A custom error message to prepend to the error, same as other assert methods.
+  # @return [String] The error message of all the difference failures.
+  def generate_error_messages(after, before, expected_differences, message)
+    expected_differences.map do |expression, expected_difference|
       expected_value = generate_expected_value(before[expression], expected_difference)
-      if !expression_passes?(after[expression], expected_value)
+      unless expression_passes?(after[expression], expected_value)
         error = "#{expression.inspect} didn't change by #{expected_difference} (expecting #{expected_value}, but got #{after[expression]})"
         error = "#{message}.\n#{error}" if message
         error
@@ -105,6 +116,9 @@ module AssertDifference
   end
 
   # Generate the expected value or range based of the value before and the expected difference.
+  # @param [Integer] before The result of executing the expression before the test.
+  # @param [Integer, Range] expected_difference The expected difference after executing the test.
+  # @return [Integer, Range] What the value of the expression should be after executing the test.
   def generate_expected_value(before, expected_difference)
     if expected_difference.is_a? Range
       (before + expected_difference.first)..(before + expected_difference.end)
@@ -114,11 +128,14 @@ module AssertDifference
   end
 
   # Do the appropriate comparison depending on whether the expectation is a range or a value
-  def expression_passes?(actual_difference, expected_value)
-    if expected_value.is_a?(Range)
-      expected_value.include?(actual_difference)
+  # @param [Integer] actual_difference The difference between executing the expression before and after the test.
+  # @param [Integer, Range] expected_difference The expected difference, which might be a range.
+  # @return [Boolean] Whether the expression passed the test or not.
+  def expression_passes?(actual_difference, expected_difference)
+    if expected_difference.is_a?(Range)
+      expected_difference.include?(actual_difference)
     else
-      expected_value == actual_difference
+      expected_difference == actual_difference
     end
   end
 end
