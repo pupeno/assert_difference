@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - "2.5.1"
+  - "2.5"
 gemfile:
   - gemfiles/activesupport_4_2.gemfile
   - gemfiles/activesupport_5_0.gemfile
