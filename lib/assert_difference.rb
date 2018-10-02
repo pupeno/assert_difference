@@ -98,21 +98,29 @@ module AssertDifference
   end
 
   # For the cases in which there isn't a match, generate an error message.
-  # @param [Hash] after The value after running each of the expressions, as a hash indexed by expression.
-  # @param [Hash] before The value before running each of the expressions, as a hash indexed by expression.
+  # @param [Hash] after_values The value after running each of the expressions, as a hash indexed by expression.
+  # @param [Hash] before_values The value before running each of the expressions, as a hash indexed by expression.
   # @param [Hash] expected_differences The expected difference for each of the expressions, as a hash indexed by
   #    expression.
   # @param [String] message A custom error message to prepend to the error, same as other assert methods.
   # @return [String] The error message of all the difference failures.
-  def generate_error_messages(after, before, expected_differences, message)
+  def generate_error_messages(after_values, before_values, expected_differences, message)
     expected_differences.map do |expression, expected_difference|
-      expected_value = generate_expected_value(before[expression], expected_difference)
-      unless expression_passes?(after[expression], expected_value)
-        error = "#{expression.inspect} didn't change by #{expected_difference} (expecting #{expected_value}, but got #{after[expression]})"
-        error = "#{message}.\n#{error}" if message
-        error
-      end
+      expected_value = generate_expected_value(before_values[expression], expected_difference)
+      generate_error_message(after_values[expression], expected_difference, expected_value, expression, message) unless expression_passes?(after_values[expression], expected_value)
     end.compact
+  end
+
+  # @param [Integer] after_value The value after running expression.
+  # @param [Integer] expected_difference The expected difference between before and after running expression.
+  # @param [Integer, Range] expected_value The expected value after running expression.
+  # @param [String] expression The expression that was run.
+  # @param [String] message The optional error message.
+  # @return [String] The error message explaining how the test failed.
+  def generate_error_message(after_value, expected_difference, expected_value, expression, message)
+    error = "#{expression.inspect} didn't change by #{expected_difference} (expecting #{expected_value}, but got #{after_value})"
+    error = "#{message}.\n#{error}" if !message.nil? && !message.blank?
+    error
   end
 
   # Generate the expected value or range based of the value before and the expected difference.
