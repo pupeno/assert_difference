@@ -70,13 +70,13 @@ module AssertDifference
   # @param [String, nil] message error message to display on top of the description of the expectation failed.
   # @return [Object] whatever the block returned
   def assert_difference(expectations, expected_difference = 1, message = nil, &block)
-    binding = block.send(:binding)
+    binding      = block.send(:binding)
     expectations = expectations_as_hash(expected_difference, expectations) unless expectations.is_a? Hash
-    before = expectations.keys.each_with_object({}) { |expression, before| before[expression] = eval(expression, binding) }
+    before       = expectations.keys.each_with_object({}) {|expression, before| before[expression] = eval(expression, binding)}
 
     result = yield
 
-    after = expectations.keys.each_with_object({}) { |expression, after| after[expression] = eval(expression, binding) }
+    after          = expectations.keys.each_with_object({}) {|expression, after| after[expression] = eval(expression, binding)}
     error_messages = generate_error_messages(after, before, expectations, message)
     if error_messages.any?
       fail error_messages.join("\n\n").strip

@@ -6,17 +6,17 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "assert_difference/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "assert_difference"
-  spec.version       = AssertDifference::VERSION
-  spec.authors       = ["J. Pablo Fernández"]
-  spec.email         = ["pupeno@pupeno.com"]
-  spec.homepage      = "https://github.com/pupeno/assert_difference"
-  spec.summary       = "Like Rails' assert_difference, but more powerful"
-  spec.description   = "Like Rails' assert_difference, but more compact and readable syntax through hashes, testing ranges and improved error reporting."
-  spec.license       = "MIT"
+  spec.name        = "assert_difference"
+  spec.version     = AssertDifference::VERSION
+  spec.authors     = ["J. Pablo Fernández"]
+  spec.email       = ["pupeno@pupeno.com"]
+  spec.homepage    = "https://github.com/pupeno/assert_difference"
+  spec.summary     = "Like Rails' assert_difference, but more powerful"
+  spec.description = "Like Rails' assert_difference, but more compact and readable syntax through hashes, testing ranges and improved error reporting."
+  spec.license     = "MIT"
 
   spec.files         = `git ls-files`.split($/)
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.executables   = spec.files.grep(%r{^bin/}) {|f| File.basename(f)}
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
