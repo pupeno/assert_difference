@@ -1,10 +1,10 @@
 # encoding: UTF-8
 # Copyright © 2010-2018 José Pablo Fernández
 
-# This class represents a single expectations of the many that can be present in an assert_difference.
-#
-# This class is intended to be private to assert_difference and not used directly.
 module AssertDifference
+  # This class represents a single expectations of the many that can be present in an assert_difference.
+  #
+  # This class is intended to be private to assert_difference and not used directly.
   class Expectation
     attr_accessor :expression, :expected_difference, :binding, :before_value, :after_value, :expected_value
 
