@@ -71,17 +71,9 @@ module AssertDifference
   # @param [Integer, Range, nil] expected_difference expected difference when using an array or single expression.
   # @param [String, nil] error_message error message to display on top of the description of the expectation failed.
   # @return [Object] whatever the block returned
-  def assert_difference(expectations, expected_difference = 1, error_message = nil, &block)
-    binding = block.send(:binding)
-    if expectations.is_a? Hash
-      expectations = expectations.map do |expression, individual_expected_difference|
-        Expectation.new(expression, individual_expected_difference, binding)
-      end
-    else
-      expectations = Array.wrap(expectations).map do |expression|
-        Expectation.new(expression, expected_difference, binding)
-      end
-    end
+  def assert_difference(expectations, expected_difference = nil, error_message = nil, &block)
+    binding      = block.send(:binding)
+    expectations = generate_expectations(expectations, expected_difference, binding)
 
     result = yield
 
@@ -95,5 +87,27 @@ module AssertDifference
     end
 
     result
+  end
+
+  private
+
+  # Generate the array of expectations.
+  #
+  # @param [String, Array<String>, Hash<String, [Integer, Range]>] expectations Single expectation as a string, an array of expectations or hash table of
+  #   expectations and expected difference.
+  # @param [Integer, Range, nil] expected_difference Expected difference when using an array or single expression.
+  # @param [Binding] binding The context in which the expressions are run.
+  # @return [Array<Expectation>] Returns an array of {AssertDifference::Expectation} objects.
+  def generate_expectations(expectations, expected_difference, binding)
+    if expectations.is_a? Hash
+      raise Exception.new("When passing a hash of expressions/expectations, cannot define a global expectation.") unless expected_difference.nil?
+      expectations.map do |expression, individual_expected_difference|
+        Expectation.new(expression, individual_expected_difference, binding)
+      end
+    else
+      Array.wrap(expectations).map do |expression|
+        Expectation.new(expression, expected_difference || 1, binding)
+      end
+    end
   end
 end

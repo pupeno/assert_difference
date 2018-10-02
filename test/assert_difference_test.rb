@@ -78,4 +78,13 @@ class AssertDifferenceTest < MiniTest::Unit::TestCase
       end
     end
   end
+
+  should "error when both types of changes are requested at the same time" do
+    value = [1, 2 ,3]
+    assert_raises Exception do
+      assert_difference({"value.count" => +1}, 2) do
+        value << 4
+      end
+    end
+  end
 end
