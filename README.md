@@ -9,7 +9,7 @@
 A nice assert_difference method similar to the one provided by Rails but with some improvements. For example:
 
 ```ruby
-assert_difference "Company.count" => +1, "User.count" => +5, "Slot.count" => -1 do
+assert_difference "Company.count" => 1, "User.count" => 5, "Slot.count" => -1 do
   post :something
 end
 ```
@@ -21,7 +21,7 @@ would require a more verbose syntax:
 
 ```ruby
 assert_difference "Company.count" do
-  assert_difference "User.count", +5 do
+  assert_difference "User.count", 5 do
     assert_difference "Article.count", -1 do
       post :something
     end
@@ -32,7 +32,7 @@ end
 Expectations can also be ranges, for example:
 
 ```ruby
-assert_difference "Blog.count" => +1, "Post.count" => 2..5 do # Generate some sample posts when creating a blog
+assert_difference "Blog.count" => 1, "Post.count" => 2..5 do # Generate some sample posts when creating a blog
   post :create
 end
 ```

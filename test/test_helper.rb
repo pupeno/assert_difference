@@ -1,6 +1,3 @@
-# encoding: UTF-8
-# Copyright © 2010-2018 José Pablo Fernández
-
 require "rubygems"
 
 # Test coverage

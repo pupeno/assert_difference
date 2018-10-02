@@ -1,5 +1,3 @@
-# Copyright © 2010-2018 José Pablo Fernández
-
 require_relative "test_helper"
 
 require "assert_difference"
