@@ -47,6 +47,26 @@ module AssertDifference
       end
     end
 
+    # Build an array of expectations from a single, an array or a hash of raw expectations.
+    #
+    # @param [String, Array<String>, Hash<String, [Integer, Range]>] expectations Single expectation as a string, an array of expectations or hash table of
+    #   expectations and expected difference.
+    # @param [Integer, Range, nil] expected_difference Expected difference when using an array or single expression.
+    # @param [Binding] binding The context in which the expressions are run.
+    # @return [Array<Expectation>] Returns an array of {AssertDifference::Expectation} objects.
+    def self.build_expectations(expectations, expected_difference, binding)
+      if expectations.is_a? Hash
+        raise Exception.new("When passing a hash of expressions/expectations, cannot define a global expectation.") unless expected_difference.nil?
+        expectations.map do |expression, individual_expected_difference|
+          Expectation.new(expression, individual_expected_difference, binding)
+        end
+      else
+        Array.wrap(expectations).map do |expression|
+          Expectation.new(expression, expected_difference || 1, binding)
+        end
+      end
+    end
+
     private
 
     # Generate the expected value.
