@@ -5,6 +5,8 @@ module AssertDifference
   #
   # @author José Pablo Fernández
   class Expectation
+    DEFAULT_EXPECTATION = 1
+
     attr_accessor :expression, :expected_difference, :binding, :before_value, :after_value, :expected_value
 
     # Build an expectation.
@@ -57,13 +59,9 @@ module AssertDifference
     def self.build_expectations(expectations, expected_difference, binding)
       if expectations.is_a? Hash
         raise Exception.new("When passing a hash of expressions/expectations, cannot define a global expectation.") unless expected_difference.nil?
-        expectations.map do |expression, individual_expected_difference|
-          Expectation.new(expression, individual_expected_difference, binding)
-        end
+        build_expectations_from_hash(expectations, binding)
       else
-        Array.wrap(expectations).map do |expression|
-          Expectation.new(expression, expected_difference || 1, binding)
-        end
+        build_expectations_from_array(Array.wrap(expectations), expected_difference || DEFAULT_EXPECTATION, binding)
       end
     end
 
@@ -85,6 +83,29 @@ module AssertDifference
     # @return [Object] Whatever the expression returns.
     def eval_expression
       eval(expression, binding)
+    end
+
+    # Build an array of expectations from an array of raw string expressions and a global expectation.
+    #
+    # @param [Array<String>] expressions An array of expressions.
+    # @param [Integer, Range] expected_difference Expected difference.
+    # @param [Binding] binding The context in which the expressions are run.
+    # @return [Array<Expectation>] Returns an array of {AssertDifference::Expectation} objects.
+    def self.build_expectations_from_array(expressions, expected_difference, binding)
+      expressions.map do |expression|
+        Expectation.new(expression, expected_difference, binding)
+      end
+    end
+
+    # Build an array of expectations from a hash of expressions to expectations.
+    #
+    # @param [Hash<String, [Integer, Range]>] expectations A hash of expressions to expectations.
+    # @param [Binding] binding The context in which the expressions are run.
+    # @return [Array<Expectation>] Returns an array of {AssertDifference::Expectation} objects.
+    def self.build_expectations_from_hash(expectations, binding)
+      expectations.map do |expression, expected_difference|
+        Expectation.new(expression, expected_difference, binding)
+      end
     end
   end
 
